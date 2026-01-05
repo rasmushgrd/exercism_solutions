@@ -10,4 +10,4 @@ members = ["src/anagram","src/armstrong_number", "src/bob", "src/bottle_song",
     "src/clock", "src/difference_of_squares",
     "src/gigasecond", "src/grains", "src/high_scores", "src/leap", "src/matching_brackets", "src/nth_prime", "src/prime_factors", "src/proverb", "src/raindrops",
     "src/reverse_string"
-, "src/space_age", "src/sum_of_multiples"]
+, "src/space_age", "src/sublist", "src/sum_of_multiples"]
