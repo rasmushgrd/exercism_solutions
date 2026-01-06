@@ -1,27 +1,25 @@
 /// Check a Luhn checksum.
 pub fn is_valid(code: &str) -> bool {
-    let number_str = code.replace(' ', "");
-    if number_str.len() > 1 && !number_str.chars().any(|c| !c.is_numeric()) {
-        let sum = number_str
-            .chars()
-            .map(|c| c.to_digit(10).unwrap_or(0))
-            .rev()
-            .enumerate()
-            .fold(0, |acc, (i, n)| {
-                if i % 2 != 0 {
-                    let x = n * 2;
-                    match x > 9 {
-                        true => acc + x - 9,
-                        _ => acc + x,
-                    }
-                } else {
-                    acc + n
-                }
-            });
-        sum % 10 == 0
-    } else {
-        false
+    let mut sum = 0;
+    let mut count = 0;
+    for (i, n) in code
+        .chars()
+        .rev()
+        .filter(|c| !c.is_whitespace())
+        .enumerate()
+    {
+        match n.to_digit(10) {
+            None => {
+                return false;
+            }
+            Some(d) => match (i % 2 != 0, d != 9) {
+                (true, true) => sum += d * 2 % 9,
+                _ => sum += d,
+            },
+        };
+        count = i;
     }
+    count > 0 && sum % 10 == 0
 }
 
 #[cfg(test)]
