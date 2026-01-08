@@ -1,5 +1,22 @@
 pub fn nth(n: u32) -> u32 {
-    todo!("What is the 0-indexed {n}th prime number?")
+    let mut count = 0;
+    let mut prime = 2;
+    let mut end = 10;
+    while count < n {
+        println!("{}", prime);
+
+        match (prime..end).filter(|x| x % prime == 0).next() {
+            Some(p) => {
+                println!("{}", p);
+                prime = p;
+                count += 1;
+            }
+            None => {
+                end += 10;
+            }
+        }
+    }
+    prime
 }
 
 #[cfg(test)]
@@ -14,10 +31,9 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn second_prime() {
-        let output = nth(1);
-        let expected = 3;
+        let output = nth(3);
+        let expected = 5;
         assert_eq!(output, expected);
     }
 
